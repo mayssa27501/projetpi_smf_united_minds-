@@ -1,0 +1,34 @@
+{% extends 'layoutFrontOffice.html.twig' %}
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>Article index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdArtic</th>
+                <th>TitreArtic</th>
+                <th>ThemeArtic</th>
+                <th>DateAjoutArtic</th>
+                <th>DescreptifArtic</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.idArtic }}</td>
+                <td>{{ article.titreArtic }}</td>
+                <td>{{ article.themeArtic }}</td>
+                <td>{{ article.dateAjoutArtic ? article.dateAjoutArtic|date('Y-m-d') : '' }}</td>
+                <td>{{ article.descreptifArtic }}</td>
+                
+            </tr>
+       
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

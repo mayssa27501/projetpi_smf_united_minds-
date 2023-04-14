@@ -1,0 +1,38 @@
+{% extends 'layoutBackOffice.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <h1>Article</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdArtic</th>
+                <td>{{ article.idArtic }}</td>
+            </tr>
+            <tr>
+                <th>TitreArtic</th>
+                <td>{{ article.titreArtic }}</td>
+            </tr>
+            <tr>
+                <th>ThemeArtic</th>
+                <td>{{ article.themeArtic }}</td>
+            </tr>
+            <tr>
+                <th>DateAjoutArtic</th>
+                <td>{{ article.dateAjoutArtic ? article.dateAjoutArtic|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DescreptifArtic</th>
+                <td>{{ article.descreptifArtic }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_article_index') }}">back to list</a>
+
+    <a href="{{ path('app_article_edit', {'idArtic': article.idArtic}) }}">edit</a>
+
+    {{ include('article/_delete_form.html.twig') }}
+{% endblock %}

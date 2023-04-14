@@ -1,0 +1,41 @@
+{% extends 'layoutBackOffice.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>Article index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdArtic</th>
+                <th>TitreArtic</th>
+                <th>ThemeArtic</th>
+                <th>DateAjoutArtic</th>
+                <th>DescreptifArtic</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.idArtic }}</td>
+                <td>{{ article.titreArtic }}</td>
+                <td>{{ article.themeArtic }}</td>
+                <td>{{ article.dateAjoutArtic ? article.dateAjoutArtic|date('Y-m-d') : '' }}</td>
+                <td>{{ article.descreptifArtic }}</td>
+                <td>
+                    <a href="{{ path('app_article_show', {'idArtic': article.idArtic}) }}">show</a>
+                    <a href="{{ path('app_article_edit', {'idArtic': article.idArtic}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_article_new') }}">Create new</a>
+{% endblock %}

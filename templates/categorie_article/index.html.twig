@@ -1,0 +1,39 @@
+{% extends 'layoutBackOffice.html.twig' %}
+
+{% block title %}CategorieArticle index{% endblock %}
+
+{% block body %}
+    <h1>CategorieArticle index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCatArtic</th>
+                <th>NomCatArtic</th>
+                <th>DateAjoutArtic</th>
+                <th>DescriptifArtic</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_article in categorie_articles %}
+            <tr>
+                <td>{{ categorie_article.idCatArtic }}</td>
+                <td>{{ categorie_article.nomCatArtic }}</td>
+                <td>{{ categorie_article.dateAjoutArtic ? categorie_article.dateAjoutArtic|date('Y-m-d') : '' }}</td>
+                <td>{{ categorie_article.descriptifArtic }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_article_show', {'idCatArtic': categorie_article.idCatArtic}) }}">show</a>
+                    <a href="{{ path('app_categorie_article_edit', {'idCatArtic': categorie_article.idCatArtic}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_article_new') }}">Create new</a>
+{% endblock %}
