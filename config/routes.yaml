@@ -1,0 +1,8 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+#captcha_routing:
+#resource: "@CaptchaBundle/Ressources/config/routing.yaml"
+user_activation:
+    path: '/user/{id}/activate'
+    controller: 'App\Controller\UserController::activateUser'
