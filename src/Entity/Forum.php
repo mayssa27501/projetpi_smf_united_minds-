@@ -4,12 +4,11 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Forum
  *
- * @ORM\Table(name="forum", indexes={@ORM\Index(name="id_topic", columns={"id_topic"})})
+ * @ORM\Table(name="forum", indexes={@ORM\Index(name="id_u", columns={"id_u"})})
  * @ORM\Entity
  */
 class Forum
@@ -28,8 +27,6 @@ class Forum
      *
      * @ORM\Column(name="titre_forum", type="string", length=255, nullable=false)
      */
-    #[Assert\NotBlank(message:" *Champ Obligatoire")]
-    #[Assert\Length(min:10,max:20,minMessage:" *description ne contient pas le minimum des caractères.")]
     private $titreForum;
 
     /**
@@ -37,26 +34,24 @@ class Forum
      *
      * @ORM\Column(name="descriptif_forum", type="string", length=255, nullable=false)
      */
-    #[Assert\NotBlank(message:" *Champ Obligatoire")]
-    #[Assert\Length(min:10,max:20,minMessage:" *description ne contient pas le minimum des caractères.")]
     private $descriptifForum;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTime
      *
-     * @ORM\Column(name="date_forum", type="date", nullable=true)
+     * @ORM\Column(name="date_forum", type="date", nullable=false)
      */
     private $dateForum;
 
     /**
-     * @var \Topic
+     * @var \Membre
      *
-     * @ORM\ManyToOne(targetEntity="Topic")
+     * @ORM\ManyToOne(targetEntity="Membre")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_topic", referencedColumnName="id_topic")
+     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_user")
      * })
      */
-    private $idTopic;
+    private $idU;
 
     public function getIdForum(): ?int
     {
@@ -92,21 +87,21 @@ class Forum
         return $this->dateForum;
     }
 
-    public function setDateForum(?\DateTimeInterface $dateForum): self
+    public function setDateForum(\DateTimeInterface $dateForum): self
     {
         $this->dateForum = $dateForum;
 
         return $this;
     }
 
-    public function getIdTopic(): ?Topic
+    public function getIdU(): ?Membre
     {
-        return $this->idTopic;
+        return $this->idU;
     }
 
-    public function setIdTopic(?Topic $idTopic): self
+    public function setIdU(?Membre $idU): self
     {
-        $this->idTopic = $idTopic;
+        $this->idU = $idU;
 
         return $this;
     }

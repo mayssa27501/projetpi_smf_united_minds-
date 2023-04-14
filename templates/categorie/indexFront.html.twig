@@ -1,0 +1,32 @@
+{% extends 'layoutFrontOffice.html.twig' %}
+
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body %}
+    <h1>Categorie index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCategorie</th>
+                <th>Nom</th>
+                <th>Descriptif</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.idCategorie }}</td>
+                <td>{{ categorie.nom }}</td>
+                <td>{{ categorie.descriptif }}</td>
+               
+            </tr>
+        
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

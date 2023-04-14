@@ -1,0 +1,38 @@
+{% extends 'layoutFrontOffice.html.twig' %}
+
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    <h1>Evenement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdEvenement</th>
+                <th>Nom</th>
+                <th>Descriptif</th>
+                <th>Image</th>
+                <th>Likes</th>
+                <th>NbParticipants</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.idEvenement }}</td>
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.descriptif }}</td>
+                <td>{{ evenement.image }}</td>
+                <td>{{ evenement.likes }}</td>
+                <td>{{ evenement.nbParticipants }}</td>
+                
+            </tr>
+        
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

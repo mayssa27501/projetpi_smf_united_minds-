@@ -55,7 +55,7 @@ class Article
      *
      * @ORM\ManyToOne(targetEntity="Membre")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_membre")
+     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_user")
      * })
      */
     private $idU;

@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Evenement
  *
- * @ORM\Table(name="evenement", indexes={@ORM\Index(name="id_u", columns={"id_u"})})
+ * @ORM\Table(name="evenement", indexes={@ORM\Index(name="categorie_ibfk_bouftika", columns={"id_categorie"})})
  * @ORM\Entity
  */
 class Evenement
@@ -16,92 +15,130 @@ class Evenement
     /**
      * @var int
      *
-     * @ORM\Column(name="id_event", type="integer", nullable=false)
+     * @ORM\Column(name="id_evenement", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idEvent;
+    private $idEvenement;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_event", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
-    private $nomEvent;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_event", type="date", nullable=false)
-     */
-    private $dateEvent;
+    private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="descriptif_event", type="string", length=255, nullable=false)
+     * @ORM\Column(name="descriptif", type="string", length=255, nullable=false)
      */
-    private $descriptifEvent;
+    private $descriptif;
 
     /**
-     * @var \Membre
+     * @var string|null
      *
-     * @ORM\ManyToOne(targetEntity="Membre")
+     * @ORM\Column(name="image", type="string", length=10000, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="likes", type="integer", nullable=false)
+     */
+    private $likes = '0';
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_participants", type="integer", nullable=false)
+     */
+    private $nbParticipants = '0';
+
+    /**
+     * @var \Categorie
+     *
+     * @ORM\ManyToOne(targetEntity="Categorie")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_membre")
+     *   @ORM\JoinColumn(name="id_categorie", referencedColumnName="id_categorie")
      * })
      */
-    private $idU;
+    private $idCategorie;
 
-    public function getIdEvent(): ?int
+    public function getIdEvenement(): ?int
     {
-        return $this->idEvent;
+        return $this->idEvenement;
     }
 
-    public function getNomEvent(): ?string
+    public function getNom(): ?string
     {
-        return $this->nomEvent;
+        return $this->nom;
     }
 
-    public function setNomEvent(string $nomEvent): self
+    public function setNom(string $nom): self
     {
-        $this->nomEvent = $nomEvent;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getDateEvent(): ?\DateTimeInterface
+    public function getDescriptif(): ?string
     {
-        return $this->dateEvent;
+        return $this->descriptif;
     }
 
-    public function setDateEvent(\DateTimeInterface $dateEvent): self
+    public function setDescriptif(string $descriptif): self
     {
-        $this->dateEvent = $dateEvent;
+        $this->descriptif = $descriptif;
 
         return $this;
     }
 
-    public function getDescriptifEvent(): ?string
+    public function getImage(): ?string
     {
-        return $this->descriptifEvent;
+        return $this->image;
     }
 
-    public function setDescriptifEvent(string $descriptifEvent): self
+    public function setImage(?string $image): self
     {
-        $this->descriptifEvent = $descriptifEvent;
+        $this->image = $image;
 
         return $this;
     }
 
-    public function getIdU(): ?Membre
+    public function getLikes(): ?int
     {
-        return $this->idU;
+        return $this->likes;
     }
 
-    public function setIdU(?Membre $idU): self
+    public function setLikes(int $likes): self
     {
-        $this->idU = $idU;
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function getNbParticipants(): ?int
+    {
+        return $this->nbParticipants;
+    }
+
+    public function setNbParticipants(int $nbParticipants): self
+    {
+        $this->nbParticipants = $nbParticipants;
+
+        return $this;
+    }
+
+    public function getIdCategorie(): ?Categorie
+    {
+        return $this->idCategorie;
+    }
+
+    public function setIdCategorie(?Categorie $idCategorie): self
+    {
+        $this->idCategorie = $idCategorie;
 
         return $this;
     }

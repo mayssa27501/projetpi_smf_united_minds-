@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * OeuvreD'art
+ * OeuvreDart
  *
- * @ORM\Table(name="oeuvre d'art", indexes={@ORM\Index(name="id_u", columns={"id_u"})})
+ * @ORM\Table(name="oeuvre dart", indexes={@ORM\Index(name="id_u", columns={"id_u"})})
  * @ORM\Entity
  */
-class Oeuvredart
+class OeuvreDart
 {
     /**
      * @var int
@@ -61,7 +61,7 @@ class Oeuvredart
      *
      * @ORM\ManyToOne(targetEntity="Membre")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_membre")
+     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_user")
      * })
      */
     private $idU;

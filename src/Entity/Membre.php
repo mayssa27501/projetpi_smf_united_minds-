@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,108 +15,184 @@ class Membre
     /**
      * @var int
      *
-     * @ORM\Column(name="id_membre", type="integer", nullable=false)
+     * @ORM\Column(name="id_user", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idMembre;
+    private $idUser;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_membre", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
-    private $nomMembre;
+    private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom_membre", type="string", length=255, nullable=false)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
      */
-    private $prenomMembre;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adresse_membre", type="string", length=255, nullable=false)
-     */
-    private $adresseMembre;
+    private $prenom;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="num_tel_membre", type="integer", nullable=false)
+     * @ORM\Column(name="num_tel", type="integer", nullable=false)
      */
-    private $numTelMembre;
+    private $numTel;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="date_nais_membre", type="date", nullable=false)
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
      */
-    private $dateNaisMembre;
+    private $adresse;
 
-    public function getIdMembre(): ?int
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_role", type="integer", nullable=false)
+     */
+    private $idRole;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mdp", type="string", length=255, nullable=false)
+     */
+    private $mdp;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="domaine", type="string", length=255, nullable=true)
+     */
+    private $domaine;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="etat_user", type="integer", nullable=false, options={"default"="1"})
+     */
+    private $etatUser = 1;
+
+    public function getIdUser(): ?int
     {
-        return $this->idMembre;
+        return $this->idUser;
     }
 
-    public function getNomMembre(): ?string
+    public function getNom(): ?string
     {
-        return $this->nomMembre;
+        return $this->nom;
     }
 
-    public function setNomMembre(string $nomMembre): self
+    public function setNom(string $nom): self
     {
-        $this->nomMembre = $nomMembre;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getPrenomMembre(): ?string
+    public function getPrenom(): ?string
     {
-        return $this->prenomMembre;
+        return $this->prenom;
     }
 
-    public function setPrenomMembre(string $prenomMembre): self
+    public function setPrenom(string $prenom): self
     {
-        $this->prenomMembre = $prenomMembre;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getAdresseMembre(): ?string
+    public function getNumTel(): ?int
     {
-        return $this->adresseMembre;
+        return $this->numTel;
     }
 
-    public function setAdresseMembre(string $adresseMembre): self
+    public function setNumTel(int $numTel): self
     {
-        $this->adresseMembre = $adresseMembre;
+        $this->numTel = $numTel;
 
         return $this;
     }
 
-    public function getNumTelMembre(): ?int
+    public function getAdresse(): ?string
     {
-        return $this->numTelMembre;
+        return $this->adresse;
     }
 
-    public function setNumTelMembre(int $numTelMembre): self
+    public function setAdresse(string $adresse): self
     {
-        $this->numTelMembre = $numTelMembre;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
-    public function getDateNaisMembre(): ?\DateTimeInterface
+    public function getIdRole(): ?int
     {
-        return $this->dateNaisMembre;
+        return $this->idRole;
     }
 
-    public function setDateNaisMembre(\DateTimeInterface $dateNaisMembre): self
+    public function setIdRole(int $idRole): self
     {
-        $this->dateNaisMembre = $dateNaisMembre;
+        $this->idRole = $idRole;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getMdp(): ?string
+    {
+        return $this->mdp;
+    }
+
+    public function setMdp(string $mdp): self
+    {
+        $this->mdp = $mdp;
+
+        return $this;
+    }
+
+    public function getDomaine(): ?string
+    {
+        return $this->domaine;
+    }
+
+    public function setDomaine(?string $domaine): self
+    {
+        $this->domaine = $domaine;
+
+        return $this;
+    }
+
+    public function getEtatUser(): ?int
+    {
+        return $this->etatUser;
+    }
+
+    public function setEtatUser(int $etatUser): self
+    {
+        $this->etatUser = $etatUser;
 
         return $this;
     }

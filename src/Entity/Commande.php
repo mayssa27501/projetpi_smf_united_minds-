@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commande
  *
- * @ORM\Table(name="commande", indexes={@ORM\Index(name="id_u", columns={"id_u"}), @ORM\Index(name="id_oeuvre", columns={"id_oeuvre"})})
+ * @ORM\Table(name="commande", indexes={@ORM\Index(name="id_oeuvre", columns={"id_oeuvre"}), @ORM\Index(name="id_u", columns={"id_u"})})
  * @ORM\Entity
  */
 class Commande
@@ -50,17 +50,7 @@ class Commande
     private $numTelCommande;
 
     /**
-     * @var \Membre
-     *
-     * @ORM\ManyToOne(targetEntity="Membre")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_membre")
-     * })
-     */
-    private $idU;
-
-    /**
-     * @var \OeuvreDart
+     * @var \OeuvreD'art
      *
      * @ORM\ManyToOne(targetEntity="OeuvreDart")
      * @ORM\JoinColumns({
@@ -68,6 +58,16 @@ class Commande
      * })
      */
     private $idOeuvre;
+
+    /**
+     * @var \Membre
+     *
+     * @ORM\ManyToOne(targetEntity="Membre")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_user")
+     * })
+     */
+    private $idU;
 
     public function getIdCommande(): ?int
     {
@@ -122,18 +122,6 @@ class Commande
         return $this;
     }
 
-    public function getIdU(): ?Membre
-    {
-        return $this->idU;
-    }
-
-    public function setIdU(?Membre $idU): self
-    {
-        $this->idU = $idU;
-
-        return $this;
-    }
-
     public function getIdOeuvre(): ?OeuvreDart
     {
         return $this->idOeuvre;
@@ -142,6 +130,18 @@ class Commande
     public function setIdOeuvre(?OeuvreDart $idOeuvre): self
     {
         $this->idOeuvre = $idOeuvre;
+
+        return $this;
+    }
+
+    public function getIdU(): ?Membre
+    {
+        return $this->idU;
+    }
+
+    public function setIdU(?Membre $idU): self
+    {
+        $this->idU = $idU;
 
         return $this;
     }
