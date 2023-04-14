@@ -1,0 +1,4 @@
+app_oeuvre_index:
+    path: /oeuvre
+    controller: App\Controller\OeuvreController::index
+

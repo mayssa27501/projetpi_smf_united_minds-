@@ -1,0 +1,43 @@
+{% extends 'layoutFrontOffice.html.twig' %}
+
+{% block title %}Oeuvre{% endblock %}
+
+{% block body %}
+    <h1>Oeuvre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ oeuvre.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ oeuvre.type }}</td>
+            </tr>
+            <tr>
+                <th>Nb</th>
+                <td>{{ oeuvre.nb }}</td>
+            </tr>
+            <tr>
+                <th>Couleur</th>
+                <td>{{ oeuvre.couleur }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ oeuvre.prix }}</td>
+            </tr>
+            <tr>
+                <th>Dimension</th>
+                <td>{{ oeuvre.dimension }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_oeuvre_Front') }}">back to list</a>
+
+    
+
+    
+{% endblock %}
