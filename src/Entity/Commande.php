@@ -2,149 +2,108 @@
 
 namespace App\Entity;
 
+use App\Repository\CommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Commande
- *
- * @ORM\Table(name="commande", indexes={@ORM\Index(name="id_u", columns={"id_u"}), @ORM\Index(name="id_oeuvre", columns={"id_oeuvre"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=CommandeRepository::class)
  */
 class Commande
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_commande", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $idCommande;
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="addresse_commande", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $addresseCommande;
+    private $adresse;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="quantite_commande", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $quantiteCommande;
+    private $quantite;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="prix_commande", type="integer", nullable=false)
+     * @ORM\Column(type="float")
      */
-    private $prixCommande;
+    private $prixc;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="num_tel_commande", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $numTelCommande;
+    private $id_u;
 
     /**
-     * @var \Membre
-     *
-     * @ORM\ManyToOne(targetEntity="Membre")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_membre")
-     * })
+     * @ORM\Column(type="integer")
      */
-    private $idU;
+    private $id_oeuvre;
 
-    /**
-     * @var \OeuvreDart
-     *
-     * @ORM\ManyToOne(targetEntity="OeuvreDart")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_oeuvre", referencedColumnName="id_oeuvre")
-     * })
-     */
-    private $idOeuvre;
-
-    public function getIdCommande(): ?int
+    public function getId(): ?int
     {
-        return $this->idCommande;
+        return $this->id;
     }
 
-    public function getAddresseCommande(): ?string
+    public function getAdresse(): ?string
     {
-        return $this->addresseCommande;
+        return $this->adresse;
     }
 
-    public function setAddresseCommande(string $addresseCommande): self
+    public function setAdresse(string $adresse): self
     {
-        $this->addresseCommande = $addresseCommande;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
-    public function getQuantiteCommande(): ?int
+    public function getQuantite(): ?int
     {
-        return $this->quantiteCommande;
+        return $this->quantite;
     }
 
-    public function setQuantiteCommande(int $quantiteCommande): self
+    public function setQuantite(int $quantite): self
     {
-        $this->quantiteCommande = $quantiteCommande;
+        $this->quantite = $quantite;
 
         return $this;
     }
 
-    public function getPrixCommande(): ?int
+    public function getPrixc(): ?float
     {
-        return $this->prixCommande;
+        return $this->prixc;
     }
 
-    public function setPrixCommande(int $prixCommande): self
+    public function setPrixc(float $prixc): self
     {
-        $this->prixCommande = $prixCommande;
+        $this->prixc = $prixc;
 
         return $this;
     }
 
-    public function getNumTelCommande(): ?int
+    public function getIdU(): ?int
     {
-        return $this->numTelCommande;
+        return $this->id_u;
     }
 
-    public function setNumTelCommande(int $numTelCommande): self
+    public function setIdU(int $id_u): self
     {
-        $this->numTelCommande = $numTelCommande;
+        $this->id_u = $id_u;
 
         return $this;
     }
 
-    public function getIdU(): ?Membre
+    public function getIdOeuvre(): ?int
     {
-        return $this->idU;
+        return $this->id_oeuvre;
     }
 
-    public function setIdU(?Membre $idU): self
+    public function setIdOeuvre(int $id_oeuvre): self
     {
-        $this->idU = $idU;
+        $this->id_oeuvre = $id_oeuvre;
 
         return $this;
     }
-
-    public function getIdOeuvre(): ?OeuvreDart
-    {
-        return $this->idOeuvre;
-    }
-
-    public function setIdOeuvre(?OeuvreDart $idOeuvre): self
-    {
-        $this->idOeuvre = $idOeuvre;
-
-        return $this;
-    }
-
-
 }
