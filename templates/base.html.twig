@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+        <style>
+.mr{
+    padding-right:175px !important;
+}
+</style>
+
+          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="{{asset('assetsF/
+css/bootstrap/bootstrap.css')}}">
+  <link rel="stylesheet" href="{{asset('assetsF/
+css/jquery-ui.css')}}">
+  <link rel="stylesheet" href="{{asset('assetsF/
+css/owl.carousel.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assetsF/
+css/owl.theme.default.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assetsF/
+css/owl.theme.default.min.css')}}">
+
+  <link rel="stylesheet" href="{{asset('assetsF/css/jquery.fancybox.min.css')}}">
+
+  <link rel="stylesheet" href="{{asset('assetsF/css/bootstrap-datepicker.css')}}">
+
+  <link rel="stylesheet" href="{{asset('assetsF/fonts/flaticon/font/flaticon.css')}}">
+
+  <link rel="stylesheet" href="{{asset('assetsF/css/aos.css')}}">
+
+  <link rel="stylesheet" href="{{asset('assetsF/css/style.css')}}">
+        {% endblock %}
+
+        {% block javascripts %}
+                
+  <script src="{{asset('assetsF/js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{asset('assetsF/js/jquery-migrate-3.0.1.min.js')}}"></script>
+  <script src="{{asset('assetsF/js/jquery-ui.js')}}"></script>
+  <script src="{{asset('assetsF/js/popper.min.js')}}"></script>
+  <script src="{{asset('assetsF/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('assetsF/js/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('assetsF/js/jquery.stellar.min.js')}}"></script>
+  <script src="{{asset('assetsF/js/jquery.countdown.min.js')}}"></script>
+  <script src="{{asset('assetsF/js/bootstrap-datepicker.min.js')}}"></script>
+  <script src="{{asset('assetsF/js/jquery.easing.1.3.js')}}"></script>
+  <script src="{{asset('assetsF/js/aos.js')}}"></script>
+  <script src="{{asset('assetsF/js/jquery.fancybox.min.js')}}"></script>
+  <script src="{{asset('assetsF/js/jquery.sticky.js')}}"></script>
+  <script src="{{asset('assetsF/js/jquery.mb.YTPlayer.min.js')}}"></script>
+  <script src="{{asset('assetsF/js/main.js')}}"></script>
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+
+        
+        {% endblock %}
+    </body>
+</html>
