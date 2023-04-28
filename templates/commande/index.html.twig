@@ -3,7 +3,13 @@
 {% block title %}Commande index{% endblock %}
 
 {% block body %}
+<<<<<<< Updated upstream
     <h1>Commande index</h1>
+=======
+   <div style="text-align: center;">
+  <h1 style="font-size: 42px; font-family: 'Brush Script MT', cursive;">Liste Commandes</h1>
+</div>
+>>>>>>> Stashed changes
 
     <table class="table">
         <thead>
@@ -19,7 +25,11 @@
         </thead>
         <tbody>
         {% for commande in commandes %}
+<<<<<<< Updated upstream
             <tr>
+=======
+            <tr class="oeuvre-item" data-id="{{ commande.id }}">
+>>>>>>> Stashed changes
                 <td>{{ commande.id }}</td>
                 <td>{{ commande.adresse }}</td>
                 <td>{{ commande.quantite }}</td>
@@ -29,6 +39,10 @@
                 <td>
                     <a href="{{ path('app_commande_show', {'id': commande.id}) }}">show</a>
                     <a href="{{ path('app_commande_edit', {'id': commande.id}) }}">edit</a>
+<<<<<<< Updated upstream
+=======
+                    <p><a href="{{ path('app_reservation_map', {'id': commande.id}) }}" class="btn btn-info">Localisation </a></p>
+>>>>>>> Stashed changes
                 </td>
             </tr>
         {% else %}
@@ -40,4 +54,12 @@
     </table>
 
     <a href="{{ path('app_commande_new') }}">Create new</a>
+<<<<<<< Updated upstream
+=======
+    <style>
+      .oeuvre-item:hover {
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      }
+    </style>
+>>>>>>> Stashed changes
 {% endblock %}

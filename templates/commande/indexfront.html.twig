@@ -5,7 +5,13 @@
 
 {% block body %}
 <li class="nav-item"><a href="{{path('app_oeuvre_Front')}}" class="nav-link">Liste Oeuvres</a></li>
+<<<<<<< Updated upstream
     <h1>Commande index</h1>
+=======
+    <div style="text-align: center;">
+  <h1 style="font-size: 42px; font-family: 'Brush Script MT', cursive;">Liste des Commandes</h1>
+</div>
+>>>>>>> Stashed changes
 
     <table class="table">
         <thead>
@@ -19,7 +25,11 @@
         </thead>
         <tbody>
         {% for commande in commandes %}
+<<<<<<< Updated upstream
             <tr>
+=======
+            <tr class="oeuvre-item" data-id="{{ commande.id }}">
+>>>>>>> Stashed changes
                 <td>{{ commande.id }}</td>
                 <td>{{ commande.adresse }}</td>
                 <td>{{ commande.quantite }}</td>
@@ -33,6 +43,14 @@
         {% endfor %}
         </tbody>
     </table>
+<<<<<<< Updated upstream
 
+=======
+    <style>
+      .oeuvre-item:hover {
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      }
+    </style>
+>>>>>>> Stashed changes
     
 {% endblock %}

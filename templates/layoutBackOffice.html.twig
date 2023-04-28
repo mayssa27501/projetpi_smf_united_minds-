@@ -69,7 +69,7 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="{{asset('assetsB/img/user.jpg')}}" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="{{asset('assetsB/img/user1.jpg')}}" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -82,7 +82,15 @@
                     
                     
                     <a href="{{path('app_oeuvre_index')}}" class="nav-item nav-link "><i class="fa fa-tasks" aria-hidden="true"></i>Oeuvre</a>
+<<<<<<< Updated upstream
                    <a href="{{path('app_commande_index')}}" class="nav-item nav-link "><i class="fa fa-tasks" aria-hidden="true"></i>Commande</a>
+=======
+                    <a href="{{path('app_commande_index')}}" class="nav-item nav-link "><i class="fa fa-tasks" aria-hidden="true"></i>Commande</a>
+                    <a href="{{ path('stats') }}" class="nav-item nav-link"><i class="fa fa-tasks" aria-hidden="true"></i>Statistique</a>
+                    <a href="{{ path('generator_service') }}" class="nav-item nav-link"><i class="fa fa-tasks" aria-hidden="true"></i>PDF</a>
+                    <a href="{{ path('Password_send_sms') }}" class="nav-item nav-link"><i class="fa fa-tasks" aria-hidden="true"></i>SMS</a>
+                    
+>>>>>>> Stashed changes
                    
                  
                 </div>
@@ -109,9 +117,18 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
+                 <div class="row">
+        <div class="col-md-8">
+            <form method="get" action="{{ path('app_oeuvre_index') }}">
+                <div class="input-group mb-3">
+                    <input type="text" name="q" class="form-control" placeholder="Recherche" value="{{ app.request.get('q') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Rechercher</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -121,7 +138,7 @@
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle"  src="{{asset('assetsB/img/user.jpg')}}" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle"  src="{{asset('assetsB/img/user1.jpg')}}" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -131,7 +148,7 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="{{asset('assetsB/img/user.jpg')}}" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="{{asset('assetsB/img/user1.jpg')}}" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -141,7 +158,7 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="{{asset('assetsB/img/user.jpg')}}" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="{{asset('assetsB/img/user1.jpg')}}" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -178,7 +195,7 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="{{asset('assetsB/img/user.jpg')}}" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle me-lg-2" src="{{asset('assetsB/img/user1.jpg')}}" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">Administrateur</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">

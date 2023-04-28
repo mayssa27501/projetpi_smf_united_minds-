@@ -4,9 +4,45 @@
 
 {% block body %}
 
+<<<<<<< Updated upstream
     <h1>Oeuvre index</h1>
 
     <table class="table">
+=======
+{% for message in app.flashes('notification') %}
+        <div class="alert alert-info alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    {% endfor %}
+    <div style="text-align: center;">
+        <h1 style="font-size: 42px; font-family: 'Brush Script MT', cursive;">Liste Oeuvres</h1>
+    </div>
+
+   <table>
+  <tbod>
+  <tr>
+  <td>
+  <div class="ms-3">
+          <a href="{{ path('app_oeuvre_index', {'sort': 'type'}) }}" class="btn btn-outline-primary">Trier par Type</a>
+        </div>
+</td>
+<td>
+        <div class="ms-3">
+          <a href="{{ path('app_oeuvre_index', {'sort': 'prix'}) }}" class="btn btn-outline-primary">Trier par Prix</a>
+        </div>
+  </td>
+  <td>
+         <div class="ms-3">
+          <a href="{{ path('app_oeuvre_index', {'sort': 'nb'}) }}" class="btn btn-outline-primary">Trier par Nb</a>
+        </div>
+</td>
+</tr>
+</tbody>
+</table>
+
+    <table class="table"id='myTable'>
+>>>>>>> Stashed changes
         <thead>
             <tr>
                 <th>Id</th>
@@ -20,6 +56,7 @@
             </tr>
         </thead>
         <tbody>
+<<<<<<< Updated upstream
         {% for oeuvre in oeuvres %}
             <tr>
                 <td>{{ oeuvre.id }}</td>
@@ -39,8 +76,40 @@
                 <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
+=======
+        <input type="search" id="myInput" class="form-control pl-6" placeholder="Search "/><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script><script>$(document).ready(function () {$("#myInput").on("keyup", function () {var value = $(this).val().toLowerCase();$("#myTable tr ").filter(function () {$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)});})});</script>
+            {% for oeuvre in oeuvres %}
+                <tr class="oeuvre-item" data-id="{{ oeuvre.id }}">
+                    <td>{{ oeuvre.id }}</td>
+                    <td>{{ oeuvre.type }}</td>
+                    <td>{{ oeuvre.nb }}</td>
+                    <td>{{ oeuvre.couleur }}</td>
+                    <td>{{ oeuvre.prix }}</td>
+                    <td>{{ oeuvre.dimension }}</td>
+                    <td>{{ oeuvre.idU }}</td>
+                    <td>
+                        <a href="{{ path('app_oeuvre_show', {'id': oeuvre.id}) }}">show</a>
+                        <a href="{{ path('app_oeuvre_edit', {'id': oeuvre.id}) }}">edit</a>
+                        <a href="{{ path('app_qr_codes', {'id': oeuvre.id}) }}">qrcode</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+>>>>>>> Stashed changes
         </tbody>
     </table>
 
     <a href="{{ path('app_oeuvre_new') }}">Create new</a>
+<<<<<<< Updated upstream
+=======
+    <style>
+        .oeuvre-item:hover {
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+    </style>
+
+>>>>>>> Stashed changes
 {% endblock %}

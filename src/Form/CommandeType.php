@@ -21,6 +21,7 @@ class CommandeType extends AbstractType
         $builder
             ->add('adresse')
             ->add('quantite', IntegerType::class, [
+<<<<<<< Updated upstream
                 'label' => 'Quantite',
                 'constraints' => [
                     new PositiveOrZero([
@@ -29,6 +30,20 @@ class CommandeType extends AbstractType
                     new Type([
                         'type' => 'integer',
                         'message' => 'Le champ Quantite ne doit contenir que des chiffres.',
+=======
+                'label' => 'Quantité',
+                'attr' => [
+                    'min' => 1,
+                    'html5' => false
+                ],
+                'constraints' => [
+                    new PositiveOrZero([
+                        'message' => 'Le champ Quantité doit être positif ou nul.',
+                    ]),
+                    new Type([
+                        'type' => 'integer',
+                        'message' => 'Le champ Quantité ne doit contenir que des chiffres.',
+>>>>>>> Stashed changes
                     ]),
                 ]
             ])
@@ -50,6 +65,13 @@ class CommandeType extends AbstractType
             ])
             ->add('id_oeuvre', IntegerType::class, [
                 'label' => 'Id_oeuvre',
+<<<<<<< Updated upstream
+=======
+                'attr' => [
+                    'min' => 1,
+                    'html5' => false
+                ],
+>>>>>>> Stashed changes
                 'constraints' => [
                     new PositiveOrZero([
                         'message' => 'Le champ Id_oeuvre doit être positif ou nul.',
@@ -60,7 +82,11 @@ class CommandeType extends AbstractType
                     ]),
                     new Range([
                         'min' => 1,
+<<<<<<< Updated upstream
                         'max' => 17,
+=======
+                        'max' => 27,
+>>>>>>> Stashed changes
                         'notInRangeMessage' => 'Oeuvre inexistant',
                     ]),
                 ]
@@ -68,6 +94,13 @@ class CommandeType extends AbstractType
 
             ->add('id_u', IntegerType::class, [
                 'label' => 'Id_u',
+<<<<<<< Updated upstream
+=======
+                'attr' => [
+                    'min' => 1,
+                    'html5' => false
+                ],
+>>>>>>> Stashed changes
                 'constraints' => [
                     new PositiveOrZero([
                         'message' => 'Le champ Id_u doit être positif ou nul.',

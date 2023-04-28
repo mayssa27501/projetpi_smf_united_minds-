@@ -2,3 +2,9 @@ app_oeuvre_index:
     path: /oeuvre
     controller: App\Controller\OeuvreController::index
 
+<<<<<<< Updated upstream
+=======
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+>>>>>>> Stashed changes

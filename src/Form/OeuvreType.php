@@ -32,6 +32,13 @@ class OeuvreType extends AbstractType
             ])
             ->add('nb', IntegerType::class, [
                 'label' => 'Nombre',
+<<<<<<< Updated upstream
+=======
+                'attr' => [
+                    'min' => 1,
+                    'html5' => false
+                ],
+>>>>>>> Stashed changes
                 'constraints' => [
                     new PositiveOrZero([
                         'message' => 'Le champ Nombre doit être positif ou nul.',
@@ -82,6 +89,13 @@ class OeuvreType extends AbstractType
             ])
             ->add('id_u', IntegerType::class, [
                 'label' => 'Id_u',
+<<<<<<< Updated upstream
+=======
+                'attr' => [
+                    'min' => 1,
+                    'html5' => false
+                ],
+>>>>>>> Stashed changes
                 'constraints' => [
                     new PositiveOrZero([
                         'message' => 'Le champ Id_u doit être positif ou nul.',
@@ -101,4 +115,8 @@ class OeuvreType extends AbstractType
             'data_class' => Oeuvre::class,
         ]);
     }
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
 }

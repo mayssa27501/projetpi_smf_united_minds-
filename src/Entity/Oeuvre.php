@@ -125,4 +125,21 @@ class Oeuvre
 
         return $this;
     }
+<<<<<<< Updated upstream
+=======
+    public function __toString()
+{
+    return sprintf('%s (id: %d, type: %s, nb: %d, couleur: %s, prix: %.2f, dimension: %.2f, id_u: %d)',
+        self::class,
+        $this->id,
+        $this->type,
+        $this->nb,
+        $this->couleur,
+        $this->prix,
+        $this->dimension,
+        $this->id_u
+    );
+}
+    
+>>>>>>> Stashed changes
 }
