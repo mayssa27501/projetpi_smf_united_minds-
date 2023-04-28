@@ -23,7 +23,7 @@ class MailerService
     {
         
         $email = (new Email())
-            ->from('haddadialiii96@gmail.com')
+            ->from('daly.sioud@esprit.tn')
             ->to($to)
             ->subject('Reset password')
             ->text('See Twig integration for better HTML integration!');

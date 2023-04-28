@@ -84,94 +84,7 @@ class UserController extends AbstractController
             'users' => $users, 'back'=>$back
         ]);
     }
-    // add user with json
-    #[Route('/addUserMobile', name: 'app_user_addMobile', methods: ['POST'])]
-    public function addUserMobile(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
-    {
-        $user = new User();
-        $user->setEmail($request->get('email'));
-        $user->setPassword($request->get('password'));
-        $user->setRoles($request->get('roles'));
-        $user->setCin($request->get('cin'));
-        $user->setNom($request->get('nom'));
-        $user->setPrenom($request->get('prenom'));
-        $user->setTelephone($request->get('telephone'));
-        $entityManager->persist($user);
-        $entityManager->flush();
-        $jsonContent = $serializer->serialize($user, 'json', ['groups' => 'users']);
-        return new JsonResponse("user added successfully" . json_encode($jsonContent));
-    }
-
-    /** get all user with json **/
-    #[Route('/mobileAll', name: 'app_user_indexMobile', methods: ['GET'])]
-      public function indexMobile(UserRepository $userRepository, EntityManagerInterface $entityManager, SerializerInterface $serializer): JsonResponse
-      {
-      $users = $userRepository->findAll();
-      $serializedUsers = $serializer->serialize($users, 'json', ['groups' => 'users']);
-      return new JsonResponse($serializedUsers);
-     }
-
-    
-
-    /** edit user mobile json */
-    #[Route('/{id}/editUserMobile', name: 'app_user_edit_mobile', methods: ['PUT'])]
-     public function editUserMobile(SerializerInterface $serializer, Request $request, User $user, UserRepository $userRepository): Response
-     {
-     $em = $this->getDoctrine()->getManager();
-     $user = $em->getRepository(User::class)->find($request->get('id'));
-     $user->setUsername($request->get('username'));
-     $user->setEmail($request->get('email'));
-     $em->flush();
-     $jsonContent = $serializer->serialize($user, 'json', ['groups' => 'users']);
-
-     return new JsonResponse("user updated successfully" . json_encode($jsonContent));
-
-     }
-     
-    /** edit Admin mobile json */
-
-
-    #[Route('/{id}/editAdminMobile', name: 'app_admin_edit_mobile', methods: ['GET', 'POST', 'PUT'])]
-      public function editAdminMobile(SerializerInterface $serializer, Request $request, User $user, UserRepository $userRepository): Response
-      {
-      $form = $this->createForm(EdituserTypeformType::class, $user);
-      $form->handleRequest($request);
-     
-      if ($form->isSubmitted() && $form->isValid()) {
-      $userRepository->save($user, true);
-      return $this->redirectToRoute('app_admin_back', [], Response::HTTP_SEE_OTHER);
-     
-      }
-     
-      $data = [
-      'user' => $user,
-      'form' => $form,
-      ];
-     
-      $serializedData = $serializer->serialize($data, 'json');
-     
-      return new Response($serializedData, Response::HTTP_OK, [
-      'Content-Type' => 'application/json'
-      ]);
-      }
-    /** delete user mobile json */
-   #[Route('/{id}/deletemobile', name: 'app_deletemobile', methods: ['DELETE'])]
-     public function deleteMobile(Request $request, User $user, UserRepository $userRepository): Response
-     {
-     if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-     $userRepository->remove($user, true);
-     return new JsonResponse(['success' => true]);
-     }
-    
-     return new JsonResponse(['success' => false]);
-     }
-    /** show by id json */
-    #[Route('/{id}/mobile', name: 'app_user_showMobile', methods: ['GET'])]
-     public function showMobile(User $user, SerializerInterface $serializer): JsonResponse
-      {
-      $serializedUser = $serializer->serialize($user, 'json', ['groups' => 'users']);
-      return new JsonResponse($serializedUser);
-      }
+  
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository): Response
@@ -270,6 +183,100 @@ class UserController extends AbstractController
        // $user->setEtat("l utilisateur est debloque");
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
+
+
     
+      // add user with json
+      #[Route('/addUserMobile', name: 'app_user_addMobile', methods: ['POST'])]
+      public function addUserMobile(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
+      {
+          $user = new User();
+          $user->setEmail($request->get('email'));
+          $user->setPassword($request->get('password'));
+          $user->setRoles($request->get('roles'));
+          $user->setCin($request->get('cin'));
+          $user->setNom($request->get('nom'));
+          $user->setPrenom($request->get('prenom'));
+          $user->setTelephone($request->get('telephone'));
+          $entityManager->persist($user);
+          $entityManager->flush();
+          $jsonContent = $serializer->serialize($user, 'json', ['groups' => 'users']);
+          return new JsonResponse("user added successfully" . json_encode($jsonContent));
+      }
+  
+      /** get all user with json **/
+      #[Route('/mobileAll', name: 'app_user_indexMobile', methods: ['GET'])]
+        public function indexMobile(UserRepository $userRepository, EntityManagerInterface $entityManager, SerializerInterface $serializer): JsonResponse
+        {
+        $users = $userRepository->findAll();
+        $serializedUsers = $serializer->serialize($users, 'json', ['groups' => 'users']);
+        return new JsonResponse($serializedUsers);
+       }
+  
+      
+  
+      /** edit user mobile json */
+      #[Route('/{id}/editUserMobile', name: 'app_user_edit_mobile', methods: ['PUT'])]
+       public function editUserMobile(SerializerInterface $serializer, Request $request, User $user, UserRepository $userRepository): Response
+       {
+       $em = $this->getDoctrine()->getManager();
+       $user = $em->getRepository(User::class)->find($request->get('id'));
+       $user->setUsername($request->get('username'));
+       $user->setEmail($request->get('email'));
+       $em->flush();
+       $jsonContent = $serializer->serialize($user, 'json', ['groups' => 'users']);
+  
+       return new JsonResponse("user updated successfully" . json_encode($jsonContent));
+  
+       }
+       
+      /** edit Admin mobile json */
+  
+  
+      #[Route('/{id}/editAdminMobile', name: 'app_admin_edit_mobile', methods: ['GET', 'POST', 'PUT'])]
+        public function editAdminMobile(SerializerInterface $serializer, Request $request, User $user, UserRepository $userRepository): Response
+        {
+        $form = $this->createForm(EdituserTypeformType::class, $user);
+        $form->handleRequest($request);
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+        $userRepository->save($user, true);
+        return $this->redirectToRoute('app_admin_back', [], Response::HTTP_SEE_OTHER);
+       
+        }
+       
+        $data = [
+        'user' => $user,
+        'form' => $form,
+        ];
+       
+        $serializedData = $serializer->serialize($data, 'json');
+       
+        return new Response($serializedData, Response::HTTP_OK, [
+        'Content-Type' => 'application/json'
+        ]);
+        }
+      /** delete user mobile json */
+     #[Route('/{id}/deletemobile', name: 'app_deletemobile', methods: ['DELETE'])]
+       public function deleteMobile(Request $request, User $user, UserRepository $userRepository): Response
+       {
+       if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+       $userRepository->remove($user, true);
+       return new JsonResponse(['success' => true]);
+       }
+      
+       return new JsonResponse(['success' => false]);
+       }
+      /** show by id json */
+      #[Route('/{id}/mobile', name: 'app_user_showMobile', methods: ['GET'])]
+       public function showMobile(User $user, SerializerInterface $serializer): JsonResponse
+        {
+        $serializedUser = $serializer->serialize($user, 'json', ['groups' => 'users']);
+        return new JsonResponse($serializedUser);
+        }
 }
 
