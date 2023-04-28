@@ -8,19 +8,19 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>IdCatArtic</th>
-                <td>{{ categorie_article.idCatArtic }}</td>
+                <th>Id</th>
+                <td>{{ categorie_article.id }}</td>
             </tr>
             <tr>
-                <th>NomCatArtic</th>
+                <th>Nom_cat_artic</th>
                 <td>{{ categorie_article.nomCatArtic }}</td>
             </tr>
             <tr>
-                <th>DateAjoutArtic</th>
+                <th>Date_ajout_artic</th>
                 <td>{{ categorie_article.dateAjoutArtic ? categorie_article.dateAjoutArtic|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>DescriptifArtic</th>
+                <th>Descriptif_artic</th>
                 <td>{{ categorie_article.descriptifArtic }}</td>
             </tr>
         </tbody>
@@ -28,7 +28,7 @@
 
     <a href="{{ path('app_categorie_article_index') }}">back to list</a>
 
-    <a href="{{ path('app_categorie_article_edit', {'idCatArtic': categorie_article.idCatArtic}) }}">edit</a>
+    <a href="{{ path('app_categorie_article_edit', {'id': categorie_article.id}) }}">edit</a>
 
     {{ include('categorie_article/_delete_form.html.twig') }}
 {% endblock %}

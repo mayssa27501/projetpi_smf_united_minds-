@@ -2,109 +2,81 @@
 
 namespace App\Entity;
 
+use App\Repository\CategorieArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * CategorieArticle
- *
- * @ORM\Table(name="categorie_article", indexes={@ORM\Index(name="id_artic", columns={"id_artic"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: CategorieArticleRepository::class)]
 class CategorieArticle
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_cat_artic", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idCatArtic;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_cat_artic", type="string", length=255, nullable=false)
-     */
-    private $nomCatArtic;
+    #[ORM\Column(length: 255)]
+    private ?string $nom_cat_artic = null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_ajout_artic", type="date", nullable=false)
-     */
-    private $dateAjoutArtic;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date_ajout_artic = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="descriptif_artic", type="string", length=255, nullable=false)
-     */
-    private $descriptifArtic;
+    #[ORM\Column(length: 255)]
+    private ?string $descriptif_artic = null;
 
-    /**
-     * @var \Article
-     *
-     * @ORM\ManyToOne(targetEntity="Article")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_artic", referencedColumnName="id_artic")
-     * })
-     */
-    private $idArtic;
+    #[ORM\OneToMany(mappedBy: 'id_cat', targetEntity: Article::class)]
+    private Collection $articles;
 
-    public function getIdCatArtic(): ?int
+    public function __construct()
     {
-        return $this->idCatArtic;
+        $this->articles = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getNomCatArtic(): ?string
     {
-        return $this->nomCatArtic;
+        return $this->nom_cat_artic;
     }
 
-    public function setNomCatArtic(string $nomCatArtic): self
+    public function setNomCatArtic(string $nom_cat_artic): self
     {
-        $this->nomCatArtic = $nomCatArtic;
+        $this->nom_cat_artic = $nom_cat_artic;
 
         return $this;
     }
 
     public function getDateAjoutArtic(): ?\DateTimeInterface
     {
-        return $this->dateAjoutArtic;
+        return $this->date_ajout_artic;
     }
 
-    public function setDateAjoutArtic(\DateTimeInterface $dateAjoutArtic): self
+    public function setDateAjoutArtic(\DateTimeInterface $date_ajout_artic): self
     {
-        $this->dateAjoutArtic = $dateAjoutArtic;
+        $this->date_ajout_artic = $date_ajout_artic;
 
         return $this;
     }
 
     public function getDescriptifArtic(): ?string
     {
-        return $this->descriptifArtic;
+        return $this->descriptif_artic;
     }
 
-    public function setDescriptifArtic(string $descriptifArtic): self
+    public function setDescriptifArtic(string $descriptif_artic): self
     {
-        $this->descriptifArtic = $descriptifArtic;
+        $this->descriptif_artic = $descriptif_artic;
 
         return $this;
     }
-
-    public function getIdArtic(): ?Article
+    public function __toString(): string
     {
-        return $this->idArtic;
+        return $this->nom_cat_artic;
     }
-
-    public function setIdArtic(?Article $idArtic): self
-    {
-        $this->idArtic = $idArtic;
-
-        return $this;
-    }
-
-
+    
+   
 }

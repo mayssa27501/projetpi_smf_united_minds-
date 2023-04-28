@@ -4,56 +4,33 @@ namespace App\Controller;
 
 use App\Entity\CategorieArticle;
 use App\Form\CategorieArticleType;
+use App\Repository\CategorieArticleRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 #[Route('/categorie/article')]
 class CategorieArticleController extends AbstractController
 {
-
-    #[Route('/front', name: 'app_Categorie_Article_Front', methods: ['GET'])]
-    
-    public function Front(EntityManagerInterface $entityManager): Response
-    {
-        $categorieArticles = $entityManager
-            ->getRepository(CategorieArticle::class)
-            ->findAll();
-
-        return $this->render('categorie_article/indexFront.html.twig', [
-            'categorieArticles' => $categorieArticles,
-        ]);
-    }
-
-
-
-
-
-
     #[Route('/', name: 'app_categorie_article_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(CategorieArticleRepository $categorieArticleRepository,EntityManagerInterface $entityManager,Request $request): Response
     {
-        $categorieArticles = $entityManager
-            ->getRepository(CategorieArticle::class)
-            ->findAll();
-
-        return $this->render('categorie_article/index.html.twig', [
-            'categorie_articles' => $categorieArticles,
+       return $this->render('categorie_article/index.html.twig', [
+           'categorie_articles' => $categorieArticleRepository->findAll(),
         ]);
-    }
-
+      
+}
     #[Route('/new', name: 'app_categorie_article_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, CategorieArticleRepository $categorieArticleRepository): Response
     {
         $categorieArticle = new CategorieArticle();
         $form = $this->createForm(CategorieArticleType::class, $categorieArticle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($categorieArticle);
-            $entityManager->flush();
+            $categorieArticleRepository->save($categorieArticle, true);
 
             return $this->redirectToRoute('app_categorie_article_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -64,7 +41,7 @@ class CategorieArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{idCatArtic}', name: 'app_categorie_article_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_categorie_article_show', methods: ['GET'])]
     public function show(CategorieArticle $categorieArticle): Response
     {
         return $this->render('categorie_article/show.html.twig', [
@@ -72,14 +49,14 @@ class CategorieArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{idCatArtic}/edit', name: 'app_categorie_article_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, CategorieArticle $categorieArticle, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit', name: 'app_categorie_article_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, CategorieArticle $categorieArticle, CategorieArticleRepository $categorieArticleRepository): Response
     {
         $form = $this->createForm(CategorieArticleType::class, $categorieArticle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $categorieArticleRepository->save($categorieArticle, true);
 
             return $this->redirectToRoute('app_categorie_article_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -90,12 +67,11 @@ class CategorieArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{idCatArtic}', name: 'app_categorie_article_delete', methods: ['POST'])]
-    public function delete(Request $request, CategorieArticle $categorieArticle, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}', name: 'app_categorie_article_delete', methods: ['POST'])]
+    public function delete(Request $request, CategorieArticle $categorieArticle, CategorieArticleRepository $categorieArticleRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$categorieArticle->getIdCatArtic(), $request->request->get('_token'))) {
-            $entityManager->remove($categorieArticle);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete'.$categorieArticle->getId(), $request->request->get('_token'))) {
+            $categorieArticleRepository->remove($categorieArticle, true);
         }
 
         return $this->redirectToRoute('app_categorie_article_index', [], Response::HTTP_SEE_OTHER);

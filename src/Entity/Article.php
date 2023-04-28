@@ -1,129 +1,120 @@
 <?php
-
 namespace App\Entity;
 
+use App\Repository\ArticleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Article
- *
- * @ORM\Table(name="article", indexes={@ORM\Index(name="id_u", columns={"id_u"})})
- * @ORM\Entity
- */
+use Symfony\Component\Validator\Constraints as Assert;
+
+#[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_artic", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idArtic;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="titre_artic", type="string", length=255, nullable=false)
-     */
-    private $titreArtic;
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "ce champ est obligatoire")]
+    #[Assert\Regex(
+        pattern: '/\d/',
+        match: false,
+        message: 'le nom ne peut pas contenir des chiffres',
+    )]
+    private ?string $titre_artic = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="theme_artic", type="string", length=255, nullable=false)
-     */
-    private $themeArtic;
+    #[ORM\Column(length: 255)]
+    private ?string $theme_artic = null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_ajout_artic", type="date", nullable=false)
-     */
-    private $dateAjoutArtic;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date_ajout_artic = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="descreptif_artic", type="string", length=255, nullable=false)
-     */
-    private $descreptifArtic;
+    #[ORM\Column(length: 255)]
+    private ?string $descriptif_artic = null;
 
-    /**
-     * @var \Membre
-     *
-     * @ORM\ManyToOne(targetEntity="Membre")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_membre")
-     * })
-     */
-    private $idU;
+    #[ORM\ManyToOne(targetEntity: CategorieArticle::class, inversedBy: 'articles')]
+    #[ORM\JoinColumn(name: 'categorieArticle', referencedColumnName: 'id', nullable: false)]
+    private ?CategorieArticle $categorieArticle = null;
 
-    public function getIdArtic(): ?int
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+    
+
+    public function getId(): ?int
     {
-        return $this->idArtic;
+        return $this->id;
     }
 
     public function getTitreArtic(): ?string
     {
-        return $this->titreArtic;
+        return $this->titre_artic;
     }
 
-    public function setTitreArtic(string $titreArtic): self
+    public function setTitreArtic(string $titre_artic): self
     {
-        $this->titreArtic = $titreArtic;
+        $this->titre_artic = $titre_artic;
 
         return $this;
     }
 
     public function getThemeArtic(): ?string
     {
-        return $this->themeArtic;
+        return $this->theme_artic;
     }
 
-    public function setThemeArtic(string $themeArtic): self
+    public function setThemeArtic(string $theme_artic): self
     {
-        $this->themeArtic = $themeArtic;
+        $this->theme_artic = $theme_artic;
 
         return $this;
     }
 
     public function getDateAjoutArtic(): ?\DateTimeInterface
     {
-        return $this->dateAjoutArtic;
+        return $this->date_ajout_artic;
     }
 
-    public function setDateAjoutArtic(\DateTimeInterface $dateAjoutArtic): self
+    public function setDateAjoutArtic(\DateTimeInterface $date_ajout_artic): self
     {
-        $this->dateAjoutArtic = $dateAjoutArtic;
+        $this->date_ajout_artic = $date_ajout_artic;
 
         return $this;
     }
 
-    public function getDescreptifArtic(): ?string
+    public function getDescriptifArtic(): ?string
     {
-        return $this->descreptifArtic;
+        return $this->descriptif_artic;
     }
 
-    public function setDescreptifArtic(string $descreptifArtic): self
+    public function setDescriptifArtic(string $descriptif_artic): self
     {
-        $this->descreptifArtic = $descreptifArtic;
+        $this->descriptif_artic = $descriptif_artic;
 
         return $this;
     }
 
-    public function getIdU(): ?Membre
+    public function getCategorieArticle(): ?CategorieArticle
     {
-        return $this->idU;
+        return $this->categorieArticle;
     }
 
-    public function setIdU(?Membre $idU): self
+    public function setCategorieArticle(?CategorieArticle $categorieArticle): self
     {
-        $this->idU = $idU;
+        $this->categorieArticle = $categorieArticle;
 
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
 
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
 }
