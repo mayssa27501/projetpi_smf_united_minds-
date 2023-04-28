@@ -4,31 +4,127 @@
 {% block title %}Forum index{% endblock %}
 
 {% block body %}
-    <h1>Forum index</h1>
+{% for message in app.flashes('notification') %}
+      <div class="alert alert-info alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    {% endfor %}
+<style>
+.forum-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+</style>
+    <center><h4>Forum index</h4></center>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>IdForum</th>
-                <th>TitreForum</th>
-                <th>DescriptifForum</th>
-                <th>DateForum</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for forum in forums %}
-            <tr>
-                <td>{{ forum.idForum }}</td>
-                <td>{{ forum.titreForum }}</td>
-                <td>{{ forum.descriptifForum }}</td>
-                <td>{{ forum.dateForum ? forum.dateForum|date('Y-m-d') : '' }}</td>
-                
-            </tr>
+              {#affichage #}
+<div class="service" >
+        <div class="container">
+            <div class="section-header text-center">
+         
+            </div>
+            <div class="row" >
+           {% for f in forums %}
+        <div class="col-lg-4 col-md-6 mb-4" >
+        <div class="service-item  forum-item">
+{#affichage #}
+
+
+
+          
+          <center><h4 strong>{{ f.titreForum }}</h4></center>
+          <p><strong style="color:#696969">Date :</strong> {{ f.dateForum ? f.dateForum|date('Y-m-d') : ''}}</p>
+          <p><strong style="color:#696969">Description:</strong> {{ f.descriptifForum}} </p>
+          <p><strong style="color:#696969" >Topic:</strong> {{ f.idTopic }}</p>
+ {% if f.likes < 0 %}
+                        <p style="color:#696969; display:inline-block;"> Like(s):<strong style="color:#696969;"></strong> <span id="like-count-{{ f.idForum }}">0</span></p>
+                    {% else %}
+                        <p style="color:#696969; display:inline-block;"> Like(s):<strong style="color:#696969;"></strong> <span id="like-count-{{ f.idForum }}">{{f.likes}}</span></p>
+                    {% endif %}
+
+                    <a href="#" id="like-dislike-btn-{{ f.idForum }}" data-like="{{ path('like_forum', {'id': f.idForum}) }}" data-dislike="{{ path('dislike_forum', {'id': f.idForum}) }}">
+                        <img src="{{ asset('like.png') }}" alt="Profile" class="rounded-circle">
+                    </a>
+
+                    <script>
+                        const likeDislikeBtn = document.getElementById('like-dislike-btn-{{ f.idForum }}');
+                        let isLiked = false;
+                        const likeCount = document.getElementById('like-count-{{ f.idForum }}');
+                        likeDislikeBtn.addEventListener('click', () => {
+                            isLiked = !isLiked;
+                            const imgUrl = isLiked ? '{{ asset('dislike.png') }}' : '{{ asset('like.png') }}';
+                            const likeDislikeUrl = isLiked ? likeDislikeBtn.dataset.dislike : likeDislikeBtn.dataset.like;
+
+        likeDislikeBtn.querySelector('img').src = imgUrl;
+        likeDislikeBtn.href = likeDislikeUrl;
+           fetch(likeDislikeUrl)
+        .then(response => response.json())
+        .then(data => {
+            likeCount.innerText = data.likeCount;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        
+likeCount.innerText = data.likeCount;
+    });
+</script>	
+ 
        
+
+
+{# -------------------------- Share ------------------------------------  #}
+         <div class="sharethis-inline-share-buttons" ></div>
+         {# -------------------------- Share ------------------------------------  #}
+
+{#affichage #}
+        </div>
+      </div>
+      
+{#affichage #}
+
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
         {% endfor %}
-        </tbody>
-    </table>
+        {% if isPaginated is defined and isPaginated %}
+        <div class="row mt-2">
+            <nav aria-label="col Page navigation example" style="margin-top:20px; margin-left:400px;"  >
+                <ul class="pagination" >
+                    {% if page != 1 %}
+                        <li class="page-item" >
+                            <a
+                                    class="page-link"
+                                    href="{{ path('app_Forum_Front', {page: page - 1, nbre: nbre}) }}"
+                         >
+                                Précédent
+                            </a></li>
+                    {% endif %}
+                    {% for i in range(1, nbrePage) %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{{ path('app_Forum_Front', {page: i, nbre: nbre}) }}"
+                            >{{ i }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    {% if page != nbrePage %}
+                        <li class="page-item">
+                            <a
+                                    class="page-link"
+                                    href="{{ path('app_Forum_Front', {page: page + 1, nbre: nbre}) }}"
+                            >Suivant</a>
+                        </li>
+                    {% endif %}
+                           </ul>
+            </nav>
+
+        </div>
+    {% endif %}	  
+    <a href="{{ path('app_forum_newF') }}" class="btn btn-primary px-3 py-1" style="width:200px;">ajouter forum</a>
 
     
 {% endblock %}

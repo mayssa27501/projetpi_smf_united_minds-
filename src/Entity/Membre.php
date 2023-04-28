@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,71 +55,6 @@ class Membre
      * @ORM\Column(name="date_nais_membre", type="date", nullable=false)
      */
     private $dateNaisMembre;
-
-    public function getIdMembre(): ?int
-    {
-        return $this->idMembre;
-    }
-
-    public function getNomMembre(): ?string
-    {
-        return $this->nomMembre;
-    }
-
-    public function setNomMembre(string $nomMembre): self
-    {
-        $this->nomMembre = $nomMembre;
-
-        return $this;
-    }
-
-    public function getPrenomMembre(): ?string
-    {
-        return $this->prenomMembre;
-    }
-
-    public function setPrenomMembre(string $prenomMembre): self
-    {
-        $this->prenomMembre = $prenomMembre;
-
-        return $this;
-    }
-
-    public function getAdresseMembre(): ?string
-    {
-        return $this->adresseMembre;
-    }
-
-    public function setAdresseMembre(string $adresseMembre): self
-    {
-        $this->adresseMembre = $adresseMembre;
-
-        return $this;
-    }
-
-    public function getNumTelMembre(): ?int
-    {
-        return $this->numTelMembre;
-    }
-
-    public function setNumTelMembre(int $numTelMembre): self
-    {
-        $this->numTelMembre = $numTelMembre;
-
-        return $this;
-    }
-
-    public function getDateNaisMembre(): ?\DateTimeInterface
-    {
-        return $this->dateNaisMembre;
-    }
-
-    public function setDateNaisMembre(\DateTimeInterface $dateNaisMembre): self
-    {
-        $this->dateNaisMembre = $dateNaisMembre;
-
-        return $this;
-    }
 
 
 }

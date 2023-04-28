@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use App\Entity\Topic;
 use App\Form\TopicType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +13,54 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/topic')]
 class TopicController extends AbstractController
 {
+    #[Route('/statistique', name: 'stats')]
+    public function stat()
+        {
+    
+            $repository = $this->getDoctrine()->getRepository(Topic::class);
+    $topics = $repository->findAll();
+    $em = $this->getDoctrine()->getManager();
+  
+
+
+
+    
+
+    $data = array();
+    $total=0;
+    foreach ($topics as $topic) {
+        $forums = $topic->getForums();
+        $num_forums = count($forums);
+       //$total=$total+$num_reservations*$evenement->getPrix();
+       
+        $data[] = [$topic->getDescriptifTopic(), $num_forums];
+    }
+  
+
+
+   
+
+
+
+    $pieChart = new PieChart();
+    $pieChart->getData()->setArrayToDataTable(
+        array_merge([['Titre', 'Nombre de Forums']], $data)
+    );
+    $pieChart->getOptions()->setTitle('Statistiques sur les forums');
+    $pieChart->getOptions()->setHeight(1000);
+    $pieChart->getOptions()->setWidth(1400);
+    $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+    $pieChart->getOptions()->getTitleTextStyle()->setColor('green');
+    $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+    $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+    $pieChart->getOptions()->getTitleTextStyle()->setFontSize(30);
+
+ 
+
+
+
+    return $this->render('stats/stat.html.twig', array('piechart' => $pieChart));
+        }
 
 
     #[Route('/front', name: 'app_Topic_Front', methods: ['GET'])]

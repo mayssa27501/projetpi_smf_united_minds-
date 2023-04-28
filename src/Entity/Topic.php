@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Topic
@@ -30,6 +30,7 @@ class Topic
      */
     #[Assert\NotBlank(message:" *Champ Obligatoire")]
     #[Assert\Length(min:10,max:20,minMessage:" *description ne contient pas le minimum des caractères.")]
+
     private $descriptifTopic;
 
     /**
@@ -67,6 +68,31 @@ class Topic
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->idTopic;
+    }
+
+     /**
+     * @var Collection<int, Forum>
+     *
+     * @ORM\OneToMany(mappedBy="idTopic", targetEntity=Forum::class, orphanRemoval=true)
+     */
+    private Collection $forums;
+
+    public function __construct()
+    {
+        $this->forums = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection<int, Forum>
+     */
+    public function getForums(): Collection
+    {
+        return $this->forums;
+    }
+
 
 
 }

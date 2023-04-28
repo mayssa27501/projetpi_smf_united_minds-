@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Entity;
-
 use Doctrine\DBAL\Types\Types;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Forum
@@ -30,6 +31,7 @@ class Forum
      */
     #[Assert\NotBlank(message:" *Champ Obligatoire")]
     #[Assert\Length(min:10,max:20,minMessage:" *description ne contient pas le minimum des caractères.")]
+
     private $titreForum;
 
     /**
@@ -39,6 +41,7 @@ class Forum
      */
     #[Assert\NotBlank(message:" *Champ Obligatoire")]
     #[Assert\Length(min:10,max:20,minMessage:" *description ne contient pas le minimum des caractères.")]
+
     private $descriptifForum;
 
     /**
@@ -47,6 +50,13 @@ class Forum
      * @ORM\Column(name="date_forum", type="date", nullable=true)
      */
     private $dateForum;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="likes", type="integer", nullable=true)
+     */
+    private $likes;
 
     /**
      * @var \Topic
@@ -107,6 +117,17 @@ class Forum
     public function setIdTopic(?Topic $idTopic): self
     {
         $this->idTopic = $idTopic;
+
+        return $this;
+    }
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(int $likes): self
+    {
+        $this->likes = $likes;
 
         return $this;
     }

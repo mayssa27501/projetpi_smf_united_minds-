@@ -19,7 +19,7 @@ class ForumType extends AbstractType
             ->add('descriptifForum')
             
             ->add('idTopic',EntityType::class,['class'=> Topic::class,
-            'choice_label'=>'idTopic',
+            'choice_label'=>'descriptifTopic',
             'label'=>'Topic'])
             
         ;

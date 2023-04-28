@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,59 +51,6 @@ class CategorieEvenement
      * })
      */
     private $idEvent;
-
-    public function getIdCatEvent(): ?int
-    {
-        return $this->idCatEvent;
-    }
-
-    public function getNomCatEvent(): ?string
-    {
-        return $this->nomCatEvent;
-    }
-
-    public function setNomCatEvent(string $nomCatEvent): self
-    {
-        $this->nomCatEvent = $nomCatEvent;
-
-        return $this;
-    }
-
-    public function getDateAjoutEvent(): ?\DateTimeInterface
-    {
-        return $this->dateAjoutEvent;
-    }
-
-    public function setDateAjoutEvent(\DateTimeInterface $dateAjoutEvent): self
-    {
-        $this->dateAjoutEvent = $dateAjoutEvent;
-
-        return $this;
-    }
-
-    public function getDescriptifCatEvent(): ?string
-    {
-        return $this->descriptifCatEvent;
-    }
-
-    public function setDescriptifCatEvent(string $descriptifCatEvent): self
-    {
-        $this->descriptifCatEvent = $descriptifCatEvent;
-
-        return $this;
-    }
-
-    public function getIdEvent(): ?Evenement
-    {
-        return $this->idEvent;
-    }
-
-    public function setIdEvent(?Evenement $idEvent): self
-    {
-        $this->idEvent = $idEvent;
-
-        return $this;
-    }
 
 
 }

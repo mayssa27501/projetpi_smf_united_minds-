@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="oeuvre d'art", indexes={@ORM\Index(name="id_u", columns={"id_u"})})
  * @ORM\Entity
  */
-class Oeuvredart
+class OeuvreD'art
 {
     /**
      * @var int
@@ -65,83 +65,6 @@ class Oeuvredart
      * })
      */
     private $idU;
-
-    public function getIdOeuvre(): ?int
-    {
-        return $this->idOeuvre;
-    }
-
-    public function getTypeOeuvre(): ?string
-    {
-        return $this->typeOeuvre;
-    }
-
-    public function setTypeOeuvre(string $typeOeuvre): self
-    {
-        $this->typeOeuvre = $typeOeuvre;
-
-        return $this;
-    }
-
-    public function getNombreOeuvre(): ?int
-    {
-        return $this->nombreOeuvre;
-    }
-
-    public function setNombreOeuvre(int $nombreOeuvre): self
-    {
-        $this->nombreOeuvre = $nombreOeuvre;
-
-        return $this;
-    }
-
-    public function getCouleurOeuvre(): ?string
-    {
-        return $this->couleurOeuvre;
-    }
-
-    public function setCouleurOeuvre(string $couleurOeuvre): self
-    {
-        $this->couleurOeuvre = $couleurOeuvre;
-
-        return $this;
-    }
-
-    public function getPrixOeuvre(): ?int
-    {
-        return $this->prixOeuvre;
-    }
-
-    public function setPrixOeuvre(int $prixOeuvre): self
-    {
-        $this->prixOeuvre = $prixOeuvre;
-
-        return $this;
-    }
-
-    public function getDimensionOeuvre(): ?string
-    {
-        return $this->dimensionOeuvre;
-    }
-
-    public function setDimensionOeuvre(string $dimensionOeuvre): self
-    {
-        $this->dimensionOeuvre = $dimensionOeuvre;
-
-        return $this;
-    }
-
-    public function getIdU(): ?Membre
-    {
-        return $this->idU;
-    }
-
-    public function setIdU(?Membre $idU): self
-    {
-        $this->idU = $idU;
-
-        return $this;
-    }
 
 
 }

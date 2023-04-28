@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,71 +58,6 @@ class Article
      * })
      */
     private $idU;
-
-    public function getIdArtic(): ?int
-    {
-        return $this->idArtic;
-    }
-
-    public function getTitreArtic(): ?string
-    {
-        return $this->titreArtic;
-    }
-
-    public function setTitreArtic(string $titreArtic): self
-    {
-        $this->titreArtic = $titreArtic;
-
-        return $this;
-    }
-
-    public function getThemeArtic(): ?string
-    {
-        return $this->themeArtic;
-    }
-
-    public function setThemeArtic(string $themeArtic): self
-    {
-        $this->themeArtic = $themeArtic;
-
-        return $this;
-    }
-
-    public function getDateAjoutArtic(): ?\DateTimeInterface
-    {
-        return $this->dateAjoutArtic;
-    }
-
-    public function setDateAjoutArtic(\DateTimeInterface $dateAjoutArtic): self
-    {
-        $this->dateAjoutArtic = $dateAjoutArtic;
-
-        return $this;
-    }
-
-    public function getDescreptifArtic(): ?string
-    {
-        return $this->descreptifArtic;
-    }
-
-    public function setDescreptifArtic(string $descreptifArtic): self
-    {
-        $this->descreptifArtic = $descreptifArtic;
-
-        return $this;
-    }
-
-    public function getIdU(): ?Membre
-    {
-        return $this->idU;
-    }
-
-    public function setIdU(?Membre $idU): self
-    {
-        $this->idU = $idU;
-
-        return $this;
-    }
 
 
 }

@@ -38,34 +38,5 @@ class Role
      */
     private $idU;
 
-    public function getIdRole(): ?int
-    {
-        return $this->idRole;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getIdU(): ?Membre
-    {
-        return $this->idU;
-    }
-
-    public function setIdU(?Membre $idU): self
-    {
-        $this->idU = $idU;
-
-        return $this;
-    }
-
 
 }

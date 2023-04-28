@@ -1,4 +1,4 @@
-{% extends 'layoutBackOffice.html.twig' %}
+{% extends 'layoutFrontOffice.html.twig' %}
 
 {% block title %}New Forum{% endblock %}
 
@@ -13,5 +13,5 @@
 
     {{ include('forum/_form.html.twig') }}
 
-    <a href="{{ path('app_forum_index') }}">back to list</a>
+    <a href="{{ path('app_Forum_Front') }}">back to list</a>
 {% endblock %}

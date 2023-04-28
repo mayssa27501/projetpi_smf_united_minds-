@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,59 +51,6 @@ class CategorieArticle
      * })
      */
     private $idArtic;
-
-    public function getIdCatArtic(): ?int
-    {
-        return $this->idCatArtic;
-    }
-
-    public function getNomCatArtic(): ?string
-    {
-        return $this->nomCatArtic;
-    }
-
-    public function setNomCatArtic(string $nomCatArtic): self
-    {
-        $this->nomCatArtic = $nomCatArtic;
-
-        return $this;
-    }
-
-    public function getDateAjoutArtic(): ?\DateTimeInterface
-    {
-        return $this->dateAjoutArtic;
-    }
-
-    public function setDateAjoutArtic(\DateTimeInterface $dateAjoutArtic): self
-    {
-        $this->dateAjoutArtic = $dateAjoutArtic;
-
-        return $this;
-    }
-
-    public function getDescriptifArtic(): ?string
-    {
-        return $this->descriptifArtic;
-    }
-
-    public function setDescriptifArtic(string $descriptifArtic): self
-    {
-        $this->descriptifArtic = $descriptifArtic;
-
-        return $this;
-    }
-
-    public function getIdArtic(): ?Article
-    {
-        return $this->idArtic;
-    }
-
-    public function setIdArtic(?Article $idArtic): self
-    {
-        $this->idArtic = $idArtic;
-
-        return $this;
-    }
 
 
 }
