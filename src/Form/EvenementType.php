@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use Symfony\Component\Validator\Constraints\Regex;
 use App\Entity\Evenement;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,11 +18,15 @@ class EvenementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', null, [
-                'constraints' => [
-                    new NotBlank(),
-                ],
-            ])
+        ->add('nom', null, [
+            'constraints' => [
+                new NotBlank(),
+                new Regex([
+                    'pattern' => '/^[^\d]+$/',
+                    'message' => 'Le nom ne peut pas contenir de chiffres',
+                ]),
+            ],
+        ])
             ->add('descriptif', null, [
                 'constraints' => [
                     new NotBlank(),
@@ -40,9 +45,12 @@ class EvenementType extends AbstractType
             ])
             ->add('idCategorie', EntityType::class, [
                 'class' => Categorie::class,
-                'choice_label' => 'idCategorie',
+                'choice_label' => 'nom',
                 'label' => 'Categorie'
-            ]);
+            ])
+            ->add('date_debut')
+            ->add('date_fin')
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -79,7 +87,7 @@ class EvenementType extends AbstractType
             ->add('nbParticipants')
             
             ->add('idCategorie',EntityType::class,['class'=> Categorie::class,
-           'choice_label'=>'idCategorie',
+           'choice_label'=>'nom',
            'label'=>'Categorie']);
         ;
     }

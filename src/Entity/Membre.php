@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,8 +15,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Membre
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id_user", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -83,6 +83,16 @@ class Membre
      * @ORM\Column(name="etat_user", type="integer", nullable=false, options={"default"="1"})
      */
     private $etatUser = 1;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="membre", orphanRemoval=true)
+     */
+    private $participations;
+
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
+    }
 
     public function getIdUser(): ?int
     {
@@ -193,6 +203,36 @@ class Membre
     public function setEtatUser(int $etatUser): self
     {
         $this->etatUser = $etatUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participation>
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setMembre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getMembre() === $this) {
+                $participation->setMembre(null);
+            }
+        }
 
         return $this;
     }

@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +52,21 @@ class Evenement
      */
     private $likes = '0';
 
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="date_debut", type="date", nullable=true)
+     */
+    private $date_debut ;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="date_fin", type="date", nullable=true)
+     */
+    private $date_fin ;
+
     /**
      * @var int
      *
@@ -65,6 +83,16 @@ class Evenement
      * })
      */
     private $idCategorie;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="Evenement", orphanRemoval=true)
+     */
+    private $participations;
+
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
+    }
 
     public function getIdEvenement(): ?int
     {
@@ -139,6 +167,60 @@ class Evenement
     public function setIdCategorie(?Categorie $idCategorie): self
     {
         $this->idCategorie = $idCategorie;
+
+        return $this;
+    }
+
+    public function getDateDebut(): ?\DateTimeInterface
+    {
+        return $this->date_debut;
+    }
+
+    public function setDateDebut(?\DateTimeInterface $date_debut): self
+    {
+        $this->date_debut = $date_debut;
+
+        return $this;
+    }
+
+    public function getDateFin(): ?\DateTimeInterface
+    {
+        return $this->date_fin;
+    }
+
+    public function setDateFin(?\DateTimeInterface $date_fin): self
+    {
+        $this->date_fin = $date_fin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participation>
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getEvenement() === $this) {
+                $participation->setEvenement(null);
+            }
+        }
 
         return $this;
     }
