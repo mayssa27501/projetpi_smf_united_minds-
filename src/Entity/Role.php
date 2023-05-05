@@ -3,40 +3,41 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RoleRepository;
 
-/**
- * Role
- *
- * @ORM\Table(name="role", indexes={@ORM\Index(name="id_u", columns={"id_u"})})
- * @ORM\Entity
- */
+
+
+#[ORM\Entity(repositoryClass: RoleRepository::class)]
 class Role
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_role", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idRole;
+   
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ? int $idRole=null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255, nullable=false)
-     */
-    private $type;
+    
+    #[ORM\Column(length : 255)]
+    private ? string $type=null;
 
-    /**
-     * @var \Membre
-     *
-     * @ORM\ManyToOne(targetEntity="Membre")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_membre")
-     * })
-     */
-    private $idU;
+    public function getIdRole(): ?int
+    {
+        return $this->idRole;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+   
 
 
 }

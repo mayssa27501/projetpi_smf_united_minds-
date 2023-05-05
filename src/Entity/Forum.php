@@ -1,72 +1,37 @@
 <?php
 
 namespace App\Entity;
-use Doctrine\DBAL\Types\Types;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\DBAL\Types\Types;
 
-
-/**
- * Forum
- *
- * @ORM\Table(name="forum", indexes={@ORM\Index(name="id_topic", columns={"id_topic"})})
- * @ORM\Entity
- */
+#[ORM\Entity]
 class Forum
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_forum", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idForum;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ? int $idForum=null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="titre_forum", type="string", length=255, nullable=false)
-     */
-    #[Assert\NotBlank(message:" *Champ Obligatoire")]
-    #[Assert\Length(min:10,max:20,minMessage:" *description ne contient pas le minimum des caractères.")]
+    #[ORM\Column(length : 255)]
+    private ? string $titreForum=null;
 
-    private $titreForum;
+    
+    #[ORM\Column(length : 255)]
+    private ? string $descriptifForum=null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="descriptif_forum", type="string", length=255, nullable=false)
-     */
-    #[Assert\NotBlank(message:" *Champ Obligatoire")]
-    #[Assert\Length(min:10,max:20,minMessage:" *description ne contient pas le minimum des caractères.")]
 
-    private $descriptifForum;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $dateForum = null;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="date_forum", type="date", nullable=true)
-     */
-    private $dateForum;
+    
+    #[ORM\Column]
+    private ? int $likes=null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="likes", type="integer", nullable=true)
-     */
-    private $likes;
-
-    /**
-     * @var \Topic
-     *
-     * @ORM\ManyToOne(targetEntity="Topic")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_topic", referencedColumnName="id_topic")
-     * })
-     */
-    private $idTopic;
+    
+    #[ORM\ManyToOne(targetEntity: Topic::class)]
+    #[ORM\JoinColumn(name: "id_topic", referencedColumnName: "id_topic")]
+    private ?Topic $idTopic = null;
 
     public function getIdForum(): ?int
     {
@@ -97,14 +62,26 @@ class Forum
         return $this;
     }
 
-    public function getDateForum(): ?\DateTimeInterface
+    public function getDateForum(): ?\DateTimeImmutable
     {
         return $this->dateForum;
     }
 
-    public function setDateForum(?\DateTimeInterface $dateForum): self
+    public function setDateForum(\DateTimeImmutable $dateForum): self
+{
+    $this->dateForum = $dateForum;
+    return $this;
+}
+
+
+    public function getLikes(): ?int
     {
-        $this->dateForum = $dateForum;
+        return $this->likes;
+    }
+
+    public function setLikes(int $likes): self
+    {
+        $this->likes = $likes;
 
         return $this;
     }
@@ -120,17 +97,11 @@ class Forum
 
         return $this;
     }
-    public function getLikes(): ?int
-    {
-        return $this->likes;
-    }
-
-    public function setLikes(int $likes): self
-    {
-        $this->likes = $likes;
-
-        return $this;
-    }
+    
+    public function __toString(): string
+{
+    return $this->titreForum ?: 'Forum #'.$this->idForum;
+}
 
 
 }

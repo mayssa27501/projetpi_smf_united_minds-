@@ -1,0 +1,86 @@
+{% extends 'layoutFrontOffice.html.twig' %}
+
+{% block title %}Oeuvre index{% endblock %}
+
+
+
+{% block body %}
+<input type="search" id="myInput" class="form-control pl-6" placeholder="Search "/><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script><script>$(document).ready(function () {$("#myInput").on("keyup", function () {var value = $(this).val().toLowerCase();$("#myTable tr ").filter(function () {$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)});})});</script>
+
+<div style="text-align: center;">
+  <h1 style="font-size: 42px; font-family: 'Brush Script MT', cursive;">Les Oeuvres Qui Font Vibrer Nos Murs</h1>
+</div>
+
+<a href="{{ path('favorites') }}" class="btn btn-sm btn-outline-secondary">WishList</a>
+<div class="row">
+  {% for oeuvre in oeuvres %}
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm hover-effect">
+        {% if oeuvre.type == 'tableau' %}
+          <img src="{{ asset('front/images/tableau.jpg') }}" alt="tableau" class="card-img-top">
+        {% elseif oeuvre.type == 'peinture' %}
+          <img src="{{ asset('front/images/peinture.jpg') }}" alt="peinture" class="card-img-top">
+        {% elseif oeuvre.type == 'sculpture' %}
+          <img src="{{ asset('front/images/sculpture.jpg') }}" alt="sculpture" class="card-img-top">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ oeuvre.type }}</h5>
+          <p class="card-text">{{ oeuvre.couleur }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a href="{{ path('app_oeuvre_showF', {'id': oeuvre.id}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
+            </div>
+            <small class="text-muted">{{ oeuvre.prix }} €</small>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary btn-block add-to-favorites" data-id="{{ oeuvre.id }}">Ajouter aux favoris</button>
+        </div>
+      </div>
+    </div>
+    
+  {% endfor %}
+</div>
+<style>
+.hover-effect:hover {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+</style>
+
+<script src="{{ asset('jquery-3.6.4.js') }}"></script>
+<script>
+$(document).ready(function() {
+  $('.add-to-favorites').click(function(e) {
+    e.preventDefault();
+
+    var oeuvreId = $(this).data('id');
+    console.log('oeuvreId = ' + oeuvreId); // Message de débogage
+    $.ajax({
+      type: 'POST',
+      url: '{{ path('app_add_to_favorites', {'id': '__ID__'}) }}'.replace('__ID__', oeuvreId),
+
+      data: { id: oeuvreId },
+      success: function() {
+        alert('L\'oeuvre a été ajoutée aux favoris !');
+      },
+      error: function() {
+        alert('Une erreur est survenue lors de l\'ajout aux favoris.');
+      }
+    });
+  });
+});
+</script>
+
+
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+{% endblock %}

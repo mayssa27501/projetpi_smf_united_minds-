@@ -3,71 +3,107 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommandeRepository;
+use Doctrine\DBAL\Types\Types;
 
-/**
- * Commande
- *
- * @ORM\Table(name="commande", indexes={@ORM\Index(name="id_oeuvre", columns={"id_oeuvre"}), @ORM\Index(name="id_u", columns={"id_u"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: CommandeRepository::class)]
+
 class Commande
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_commande", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idCommande;
+ 
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ? int $idCommande=null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="addresse_commande", type="string", length=255, nullable=false)
-     */
-    private $addresseCommande;
+    
+    #[ORM\Column(length : 255)]
+    private ? string $adresse=null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="quantite_commande", type="integer", nullable=false)
-     */
-    private $quantiteCommande;
+    
+    #[ORM\Column]
+    private ? int $quantite=null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="prix_commande", type="integer", nullable=false)
-     */
-    private $prixCommande;
+    
+    #[ORM\Column]
+    private ? float $prixc=null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="num_tel_commande", type="integer", nullable=false)
-     */
-    private $numTelCommande;
+    
+    #[ORM\ManyToOne(targetEntity: Oeuvre::class)]
+    #[ORM\JoinColumn(name: "id_oeuvre", referencedColumnName: "id")]
+    private ?Oeuvre $idOeuvre = null;
 
-    /**
-     * @var \OeuvreD'art
-     *
-     * @ORM\ManyToOne(targetEntity="OeuvreD'art")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_oeuvre", referencedColumnName="id_oeuvre")
-     * })
-     */
-    private $idOeuvre;
+    
+    #[ORM\ManyToOne(targetEntity: Membre::class)]
+    #[ORM\JoinColumn(name: "id_u", referencedColumnName: "id_user")]
+    private ?Membre $idU = null;
 
-    /**
-     * @var \Membre
-     *
-     * @ORM\ManyToOne(targetEntity="Membre")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_u", referencedColumnName="id_membre")
-     * })
-     */
-    private $idU;
+    public function getIdCommande(): ?int
+    {
+        return $this->idCommande;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): self
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getPrixc(): ?float
+    {
+        return $this->prixc;
+    }
+
+    public function setPrixc(float $prixc): self
+    {
+        $this->prixc = $prixc;
+
+        return $this;
+    }
+
+    public function getIdOeuvre(): ?Oeuvre
+    {
+        return $this->idOeuvre;
+    }
+
+    public function setIdOeuvre(?Oeuvre $idOeuvre): self
+    {
+        $this->idOeuvre = $idOeuvre;
+
+        return $this;
+    }
+
+    public function getIdU(): ?Membre
+    {
+        return $this->idU;
+    }
+
+    public function setIdU(?Membre $idU): self
+    {
+        $this->idU = $idU;
+
+        return $this;
+    }
+
+  
 
 
 }

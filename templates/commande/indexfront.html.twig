@@ -1,0 +1,44 @@
+{% extends 'layoutFrontOffice.html.twig' %}
+
+
+{% block title %}Commande index{% endblock %}
+
+{% block body %}
+<li class="nav-item"><a href="{{path('app_oeuvre_Front')}}" class="nav-link">Liste Oeuvres</a></li>
+    <div style="text-align: center;">
+  <h1 style="font-size: 42px; font-family: 'Brush Script MT', cursive;">Liste des Commandes</h1>
+</div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Adresse</th>
+                <th>Quantite</th>
+                <th>Prixc</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr class="oeuvre-item" data-id="{{ commande.idCommande }}">
+                <td>{{ commande.idCommande }}</td>
+                <td>{{ commande.adresse }}</td>
+                <td>{{ commande.quantite }}</td>
+                <td>{{ commande.prixc }}</td>
+                <td>
+                    <a href="{{ path('app_commande_showF', {'idCommande': commande.idCommande}) }}">show</a>
+                    
+                </td>
+            </tr>
+       
+        {% endfor %}
+        </tbody>
+    </table>
+    <style>
+      .oeuvre-item:hover {
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      }
+    </style>
+    
+{% endblock %}

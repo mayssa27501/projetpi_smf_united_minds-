@@ -59,7 +59,7 @@ class TopicController extends AbstractController
 
 
 
-    return $this->render('stats/stat.html.twig', array('piechart' => $pieChart));
+    return $this->render('mstats/stat.html.twig', array('piechart' => $pieChart));
         }
 
 

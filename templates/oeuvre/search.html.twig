@@ -1,0 +1,9 @@
+{% if oeuvres is not empty %}
+    <ul>
+    {% for oeuvre in oeuvres %}
+        <li>{{ oeuvre.nom }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun résultat trouvé pour votre recherche "{{ query }}".</p>
+{% endif %}

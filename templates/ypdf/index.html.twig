@@ -1,0 +1,24 @@
+<h1 style="text-align: center;">Liste des articles</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th style="color:#009CFF;">Id Article</th>
+            <th style="color:#009CFF;">Titre</th>
+            <th style="color:#009CFF;">Description</th>
+            <th style="color:#009CFF;">Date</th>
+            <th style="color:#009CFF;">Categorie</th>
+        </tr>  
+    </thead>
+    <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.getTitreArtic() }}</td>
+                <td>{{ article.getDescriptifArtic() }}</td>
+                <td>{{ article.getDateAjoutArtic() ? article.getDateAjoutArtic()|date('Y-m-d') : '' }}</td>
+                <td>{{ article.getCategorieArticle() }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,34 @@
+
+    <img src="{{ asset('uploads/evenements/logo.jpg') }}" style="width: 140px; height: 100px;" alt="Description de votre image">
+    
+</div>
+ <br>
+ <br>
+ <table  border="1">
+        <thead >
+            <tr>
+                <th style="color:#009CFF;">Id Forum</th>
+               
+                <th style="color:#009CFF;">Titre</th>
+                <th style="color:#009CFF;">Description</th>
+                
+                <th style="color:#009CFF;">Date</th>
+                <th style="color:#009CFF;">Topic</th>
+                
+         </tr>  
+        </thead>
+            <tbody>
+                        {% for f in forum %}
+            <tr>
+                <td >{{ f.idForum }}</td>
+                
+                <td>{{ f.titreForum }}</td>
+                <td>{{ f.descriptifForum}}</td>
+                
+                <td>{{ f.dateForum ? f.dateForum|date('Y-m-d') : '' }}</td>
+                <td>{{ f.idTopic }}</td>
+                          
+             </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>

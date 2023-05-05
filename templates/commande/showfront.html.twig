@@ -1,0 +1,42 @@
+{% extends 'layoutFrontOffice.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+    <h1>Commande</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commande.idCommande }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ commande.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ commande.quantite }}</td>
+            </tr>
+            <tr>
+                <th>Prixc</th>
+                <td>{{ commande.prixc }}</td>
+            </tr>
+            <tr>
+                <th>Id_u</th>
+                <td>{{ commande.idU }}</td>
+            </tr>
+            <tr>
+                <th>Id_oeuvre</th>
+                <td>{{ commande.idOeuvre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commande_Front') }}">back to list</a>
+
+    
+
+    
+{% endblock %}

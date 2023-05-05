@@ -1,5 +1,5 @@
-
-    <img src="{{ asset('logo.jpg') }}" style="width: 140px; height: 100px;" alt="Description de votre image">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <img src="{{ asset('imagee/logo.jpg') }}" style="width: 140px; height: 100px;" alt="Description de votre image">
     
 </div>
  <br>
@@ -7,26 +7,26 @@
  <table  border="1">
         <thead >
             <tr>
-                <th style="color:#009CFF;">Id Forum</th>
-               
-                <th style="color:#009CFF;">Titre</th>
-                <th style="color:#009CFF;">Description</th>
-                
-                <th style="color:#009CFF;">Date</th>
-                <th style="color:#009CFF;">Topic</th>
+                <th style="color:#009CFF;">Id </th>
+                <th style="color:#009CFF;">Type</th>
+                <th style="color:#009CFF;">Nb</th>
+                <th style="color:#009CFF;">Couleur</th>
+                <th style="color:#009CFF;">Prix</th>
+                <th style="color:#009CFF;">Dimension</th>
+                <th style="color:#009CFF;">Id_u</th>
                 
          </tr>  
         </thead>
             <tbody>
-                        {% for f in forum %}
+                        {% for oeuvres in oeuvre %}
             <tr>
-                <td >{{ f.idForum }}</td>
-                
-                <td>{{ f.titreForum }}</td>
-                <td>{{ f.descriptifForum}}</td>
-                
-                <td>{{ f.dateForum ? f.dateForum|date('Y-m-d') : '' }}</td>
-                <td>{{ f.idTopic }}</td>
+                <td >{{ oeuvres.id }}</td>
+                <td>{{ oeuvres.type }}</td>
+                <td>{{ oeuvres.nb}}</td>
+                <td>{{ oeuvres.couleur }}</td>
+                <td>{{ oeuvres.prix }}</td>
+                <td>{{ oeuvres.dimension }}</td>
+                <td>{{ oeuvres.IdU }}</td>
                           
              </tr>
                         {% endfor %}

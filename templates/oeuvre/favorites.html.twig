@@ -1,0 +1,31 @@
+{% extends 'layoutFrontOffice.html.twig' %}
+
+{% block title %}Mes favoris{% endblock %}
+
+{% block body %}
+  <h1>Mes favoris</h1>
+
+  {% if favoris is not empty %}
+    <div class="row">
+      {% for favori in favoris %}
+        {% set oeuvre = favori.getIdOeuvre() %}
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ oeuvre.getType() }}</h5>
+              <p class="card-text">
+                {{ oeuvre.getCouleur() }} - 
+                {{ oeuvre.getPrix() }}€ - 
+                {{ oeuvre.getDimension() }}cm - 
+                {{ oeuvre.getNb() }} exemplaires
+              </p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Aucun favori trouvé.</p>
+  {% endif %}
+  <a href="{{ path('app_oeuvre_Front') }}">Retour</a>
+{% endblock %}

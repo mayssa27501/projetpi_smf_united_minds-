@@ -1,0 +1,51 @@
+{% extends 'layoutBackOffice.html.twig' %}
+
+{% block title %}Commande index{% endblock %}
+
+{% block body %}
+   <div style="text-align: center;">
+  <h1 style="font-size: 42px; font-family: 'Brush Script MT', cursive;">Liste Commandes</h1>
+</div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Adresse</th>
+                <th>Quantite</th>
+                <th>Prixc</th>
+                <th>Id_u</th>
+                <th>Id_oeuvre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr class="oeuvre-item" data-id="{{ commande.idCommande }}">
+                <td>{{ commande.idCommande }}</td>
+                <td>{{ commande.adresse }}</td>
+                <td>{{ commande.quantite }}</td>
+                <td>{{ commande.prixc }}</td>
+                <td>{{ commande.idu }}</td>
+                <td>{{ commande.idoeuvre }}</td>
+                <td>
+                    <a href="{{ path('app_commande_show', {'idCommande': commande.idCommande}) }}">show</a>
+                    <a href="{{ path('app_commande_edit', {'idCommande': commande.idCommande}) }}">edit</a>
+                    <p><a href="{{ path('app_reservation_map', {'idCommande': commande.idCommande}) }}" class="btn btn-info">Localisation </a></p>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commande_new') }}">Create new</a>
+    <style>
+      .oeuvre-item:hover {
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      }
+    </style>
+{% endblock %}

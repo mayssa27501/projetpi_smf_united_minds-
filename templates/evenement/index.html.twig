@@ -1,0 +1,44 @@
+{% extends 'layoutBackOffice.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    
+
+    <table class="table"id='myTable'>
+        <thead>
+            <tr>
+                <th>IdEvenement</th>
+                <th>Nom</th>
+                <th>Descriptif</th>
+                <th>Image</th>
+                <th>Likes</th>
+                <th>NbParticipants</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <input type="search" id="myInput" class="form-control pl-6" placeholder="Search "/><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script><script>$(document).ready(function () {$("#myInput").on("keyup", function () {var value = $(this).val().toLowerCase();$("#myTable tr ").filter(function () {$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)});})});</script>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.idEvenement }}</td>
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.descriptif }}</td>
+                <td>{{ evenement.image }}</td>
+                <td>{{ evenement.likes }}</td>
+                <td>{{ evenement.nbParticipants }}</td>
+                <td>
+                    <a href="{{ path('app_evenement_show', {'idEvenement': evenement.idEvenement}) }}">show</a>
+                    <a href="{{ path('app_evenement_edit', {'idEvenement': evenement.idEvenement}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_evenement_new') }}">Create new</a>
+{% endblock %}

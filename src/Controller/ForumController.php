@@ -28,7 +28,7 @@ class ForumController extends AbstractController
         $nbforum = $repository->count([]);
         // 24
         $nbrePage = ceil($nbforum / $nbre) ;
-//offset
+
         $forums = $repository->findBy([], [],$nbre, (intval($page) - 1 ) * $nbre);
 
         return $this->render('forum/indexFront.html.twig', [
@@ -79,10 +79,10 @@ class ForumController extends AbstractController
             "clochard",
             "sang"
         );
-        dump($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $forum->setDateForum(new \DateTime());
+            $forum->setDateForum(new \DateTimeImmutable());
             $myText = $request->get("forum")['descriptifForum'];
             $badwords = new PhpBadWordsController();
             $badwords->setDictionaryFromArray($myDictionary)
@@ -138,16 +138,16 @@ class ForumController extends AbstractController
             "clochard",
             "sang"
         );
-        dump($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $forum->setDateForum(new \DateTime());
+            $forum->setDateForum(new \DateTimeImmutable());
             $myText = $request->get("forum")['descriptifForum'];
             $badwords = new PhpBadWordsController();
             $badwords->setDictionaryFromArray($myDictionary)
                 ->setText($myText);
             $check = $badwords->check();
-            dump($check);
+            
             if ($check) {
                 $notifier->send(new Notification('Mauvais mot ', ['browser']));
                 return $this->redirectToRoute('app_forum_newF', [], Response::HTTP_SEE_OTHER); 
@@ -221,8 +221,8 @@ class ForumController extends AbstractController
 
         return $this->redirectToRoute('app_forum_index', [], Response::HTTP_SEE_OTHER);
     }
-    #[Route('/pdf/forum', name: 'generator_service')]
-    public function pdfForum(): Response
+    #[Route('/pdf/evenement', name: 'generator_service')]
+    public function pdfEvenement(): Response
     { 
         $forum= $this->getDoctrine()
         ->getRepository(Forum::class)
@@ -230,7 +230,7 @@ class ForumController extends AbstractController
 
    
 
-        $html =$this->renderView('pdf/index.html.twig', ['forum' => $forum]);
+        $html =$this->renderView('mpdf/index.html.twig', ['forum' => $forum]);
         $pdfGeneratorService=new PdfGeneratorService();
         $pdf = $pdfGeneratorService->generatePdf($html);
 

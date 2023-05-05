@@ -1,0 +1,86 @@
+{% extends 'layoutBackOffice.html.twig' %}
+
+{% block title %} liste des articles{% endblock %}
+
+{% block body %}
+ <style> 
+ .circular-image {
+      width: 70%;
+      height: 10%;
+      object-fit: contain;
+    }
+  </style>
+
+{% for message in app.flashes('notification') %}
+      <div class="alert alert-info alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    {% endfor %}
+    <h1>liste des articles</h1>
+      <div class="d-flex justify-content-end mb-3">
+        <form class="input-group" method="get">
+        <input type="search" id="myInput" class="form-control pl-6" placeholder="Search "/>
+					
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+					<script>
+						$(document).ready(function () {
+                        $("#myInput").on("keyup", function () {
+                        var value = $(this).val().toLowerCase();
+                        $("#rs tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                            });
+                         })
+                        });
+					</script>
+        </form>
+
+        <div class="ms-3">
+          <a href="{{ path('app_article_index', {'sort': 'titre_artic'}) }}" class="btn btn-outline-primary">Trier par Titre</a>
+        </div>
+
+        <div class="ms-3">
+          <a href="{{ path('app_article_index', {'sort': 'date_ajout_artic'}) }}" class="btn btn-outline-primary">Trier par Date</a>
+        </div>
+         <div class="ms-3">
+          <a href="{{ path('app_article_index', {'sort': 'theme_artic'}) }}" class="btn btn-outline-primary">Trier par Theme</a>
+        </div>
+      </div>
+
+    <table class="table" id="rs">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre_artic</th>
+                <th>Theme_artic</th>
+                <th>Date_ajout_artic</th>
+                <th>Descriptif_artic</th>
+                <th>image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titreArtic }}</td>
+                <td>{{ article.themeArtic }}</td>
+                <td>{{ article.dateAjoutArtic ? article.dateAjoutArtic|date('Y-m-d') : '' }}</td>
+                <td>{{ article.descriptifArtic }}</td>
+                <td><img  src="{{asset('photo/'~article.image)}}" alt="Game" class="circular-image"></td>
+                <td>
+                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
+                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+  <a href="{{ path('app_article_new') }}">Create new</a>
+   <a href="{{ path('generator_service') }}" class="btn btn-primary px-3 py-1">Export PDF</a>
+{% endblock %}
